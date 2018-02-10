@@ -4,16 +4,36 @@ using UnityEngine.SceneManagement;
 
 public class StateManager : MonoBehaviour
 {
+	public static StateManager manager = null;
+	public Image blurCover;
     public CanvasGroup cover;
+	public CanvasGroup gameOverText;
+	public Button restart;
     public bool mainGame;
+	public bool gameOver;
+	public Text timer;
     private string scene;
     private bool changeScene = false;
     private bool uncover = false;
+	private float start;
+	public float t;
+	private string minutes;
+	private string seconds;
 
+	private void Awake()
+	{
+		if (manager == null) manager = this;
+		else if (manager != this) Destroy(gameObject);
+	}
 
     void Start()
     {
         uncover = true;
+		t = 0;
+		start = 0;
+		minutes = null;
+		seconds = null;
+		gameOver = false;
     }
 	
 	void Update ()
@@ -41,16 +61,43 @@ public class StateManager : MonoBehaviour
                 changeScene = false;
             }
         }
-        if (mainGame)
+		if (mainGame && !gameOver)
         {
-            CountDown();
+            Count();
         }
+
+		if (gameOver) {
+			GameOver();
+		}
 
 	}
 
-    private void CountDown()
-    {
+	private void GameOver()
+	{
+		Vector3 start = blurCover.transform.position;
+		Vector3 target = new Vector3(0,160,0);
 
+		if(start.y < target.y)
+		{
+			blurCover.transform.Translate(Vector3.up * 4f);
+		}
+
+		if (gameOverText.alpha < 1) 
+		{
+			gameOverText.alpha += 0.05f;
+		}
+
+		restart.interactable = true;
+	}
+
+    private void Count()
+    {
+		t = start += Time.deltaTime;
+
+		minutes = ((int)t / 60).ToString();
+		seconds = (t % 60).ToString("f2");
+
+		timer.text = minutes + ":" + seconds;
     }
 
     public void LoadScene(string sceneName)

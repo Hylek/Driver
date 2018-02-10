@@ -13,7 +13,11 @@ public class PlayerController : MonoBehaviour
 	
 	void Update () 
     {
-		
+		if (transform.position.y <= -5) 
+		{
+			StateManager.manager.gameOver = true;
+			Destroy (gameObject);
+		}
 	}
 
     void FixedUpdate()
