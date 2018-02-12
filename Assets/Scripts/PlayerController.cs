@@ -57,4 +57,13 @@ public class PlayerController : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(Vector2.right * speed);
         }
     }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.transform.name == "Car(Clone)")
+        {
+            StateManager.manager.gameOver = true;
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+        }
+    }
 }

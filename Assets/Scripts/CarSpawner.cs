@@ -1,7 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+/* Daniel Cumbor 2018 */
 public class CarSpawner : MonoBehaviour 
 {
     bool isSpawning = false;
