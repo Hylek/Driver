@@ -79,19 +79,31 @@ public class StateManager : MonoBehaviour
 			GameOver();
 		}
 
+	    if (t >= 30)
+	    {
+		    SpeedUp(4);
+	    }
 	}
 
     private void StartGame()
     {
-        countDown -= Time.deltaTime;
-        string time = (countDown % 60).ToString("f2");
-        timer.text = time;
+	    if (timer != null)
+	    {
+		    countDown -= Time.deltaTime;
+		    string time = (countDown % 60).ToString("f2");
+		    timer.text = time;
 
-        if(countDown <= 0)
-        {
-            countDown = 0;
-        }
+		    if(countDown <= 0)
+		    {
+			    countDown = 0;
+		    }
+	    }
     }
+
+	private void SpeedUp(float speedBoost)
+	{
+		
+	}
 
 	private void GameOver()
 	{

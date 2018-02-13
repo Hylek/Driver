@@ -3,6 +3,7 @@
 public class CarMover : MonoBehaviour 
 {
     public float carSpeed;
+    private float direction;
 
     void Start()
     {
@@ -15,10 +16,25 @@ public class CarMover : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (StateManager.manager.t > 30 && StateManager.manager.t < 60)
+        {
+            SpeedBoost(2);
+        }
+        if (StateManager.manager.t > 60 && StateManager.manager.t < 90)
+        {
+            SpeedBoost(4);
+        }
     }
 
 	void FixedUpdate () 
     {
         GetComponent<Rigidbody2D>().AddForce(Vector2.down * carSpeed);
 	}
+
+    private void SpeedBoost(float speedBoost)
+    {
+        carSpeed = speedBoost;
+    }
+    
 }
