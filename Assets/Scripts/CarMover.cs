@@ -4,17 +4,23 @@ using UnityEngine;
 public class CarMover : MonoBehaviour 
 {
     public float carSpeed;
+    public float transitSpeed;
     private float direction;
     private Vector2 rayPoint;
     private Vector2 rayStart;
     private Vector2 rayStart2;
     private Vector2 rayPoint2;
     private float startTime;
+    private bool isChanging;
+    private float changeTimer;
     
     void Start()
     {
-        carSpeed = Random.Range(2.0f, 3.0f);
+        carSpeed = Random.Range(2.0f, 6.0f);
+        transitSpeed = Random.Range(1.0f, 3.5f);
         startTime = 0;
+        isChanging = false;
+        changeTimer = 3;
 
     }
 
@@ -45,7 +51,19 @@ public class CarMover : MonoBehaviour
 
         if (!ChangeLanes() && startTime > 5)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.right * carSpeed);
+            isChanging = true;
+        }
+
+        if (isChanging)
+        {
+            GetComponent<Rigidbody2D>().AddForce(Vector2.right * transitSpeed);
+            
+            changeTimer -= Time.deltaTime;
+            if (changeTimer <= 0)
+            {
+                isChanging = false;
+                changeTimer = 3;
+            }
         }
     }
 
@@ -53,11 +71,6 @@ public class CarMover : MonoBehaviour
     {
         GetComponent<Rigidbody2D>().AddForce(Vector2.down * carSpeed);
 	}
-
-    private void SpeedBoost(float speedBoost)
-    {
-        carSpeed = speedBoost;
-    }
 
     private bool ChangeLanes()
     {
@@ -76,5 +89,15 @@ public class CarMover : MonoBehaviour
             return false;
         }
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.transform.name == "Car(Clone)")
+        {
+            if(carSpeed > other.gameObject.GetComponent<CarMover>().carSpeed)
+            {
+                carSpeed = other.gameObject.GetComponent<CarMover>().carSpeed;
+            }
+        }
+    }
 }

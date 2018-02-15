@@ -395,7 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minTime: 5
   maxTime: 20
-  car: {fileID: 0}
+  car: {fileID: 1469380119218152, guid: f449c97ab6a4e9348a7bca68c3746939, type: 2}
 --- !u!1 &608668364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,7 +1132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minTime: 1
   maxTime: 10
-  car: {fileID: 1692309776756222, guid: f449c97ab6a4e9348a7bca68c3746939, type: 2}
+  car: {fileID: 1469380119218152, guid: f449c97ab6a4e9348a7bca68c3746939, type: 2}
 --- !u!1 &1482207017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1175,7 +1175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minTime: 5
   maxTime: 20
-  car: {fileID: 0}
+  car: {fileID: 1469380119218152, guid: f449c97ab6a4e9348a7bca68c3746939, type: 2}
 --- !u!1 &1500287989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1691,4 +1691,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minTime: 1
   maxTime: 10
-  car: {fileID: 1692309776756222, guid: f449c97ab6a4e9348a7bca68c3746939, type: 2}
+  car: {fileID: 1469380119218152, guid: f449c97ab6a4e9348a7bca68c3746939, type: 2}

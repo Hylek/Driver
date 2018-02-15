@@ -78,13 +78,19 @@ public class StateManager : MonoBehaviour
 
 	    if (t >= 30)
 	    {
-		    SpeedUp(4);
+		    SpeedUp(1);
 	    }
 	}
 
-	private void SpeedUp(float speedBoost)
+	private void SpeedUp(int state)
 	{
-		
+		if (state == 1)
+		{
+			if (speed <= 10)
+			{
+				speed += 0.05f;
+			}
+		}
 	}
 
 	private void GameOver()
