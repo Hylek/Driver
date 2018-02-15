@@ -14,6 +14,8 @@ public class StateManager : MonoBehaviour
 	public bool gameOver;
 	public Text timer;
     public Text countDownTimer;
+	public float speed;
+	
     private string scene;
     private bool changeScene = false;
     private bool uncover = false;
@@ -21,7 +23,7 @@ public class StateManager : MonoBehaviour
 	public float t;
 	private string minutes;
 	private string seconds;
-    private float countDown = 3;
+	
 
 	private void Awake()
 	{
@@ -46,11 +48,6 @@ public class StateManager : MonoBehaviour
         if (uncover)
         {
             cover.alpha -= 0.05f;
-        }
-
-        if(startGame && cover.alpha <= 0)
-        {
-            StartGame();
         }
 
         // If there is a cover and change scene has been requested, continue.
@@ -84,21 +81,6 @@ public class StateManager : MonoBehaviour
 		    SpeedUp(4);
 	    }
 	}
-
-    private void StartGame()
-    {
-	    if (timer != null)
-	    {
-		    countDown -= Time.deltaTime;
-		    string time = (countDown % 60).ToString("f2");
-		    timer.text = time;
-
-		    if(countDown <= 0)
-		    {
-			    countDown = 0;
-		    }
-	    }
-    }
 
 	private void SpeedUp(float speedBoost)
 	{
