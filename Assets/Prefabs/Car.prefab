@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 212397238158716768}
   - component: {fileID: 50913154583173308}
   - component: {fileID: 61876885446588306}
-  - component: {fileID: 114711656129998508}
   - component: {fileID: 61903324017229578}
-  m_Layer: 0
+  - component: {fileID: 114144918167013032}
+  m_Layer: 8
   m_Name: Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &114711656129998508
+--- !u!114 &114144918167013032
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -122,10 +122,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1469380119218152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1511bf21db109ae4093936575445254d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cd855830588c2e478654abcaecd3d65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carSpeed: 2
+  clearRight: 0
+  clearLeft: 0
+  clearFront: 0
 --- !u!212 &212397238158716768
 SpriteRenderer:
   m_ObjectHideFlags: 1

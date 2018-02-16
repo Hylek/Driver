@@ -29,6 +29,7 @@ public class StateManager : MonoBehaviour
 	{
 		if (manager == null) manager = this;
 		else if (manager != this) Destroy(gameObject);
+		blurCover.enabled = false;
 	}
 
     void Start()
@@ -68,9 +69,9 @@ public class StateManager : MonoBehaviour
             }
         }
 		if (mainGame && !gameOver)
-        {
-            Count();
-        }
+		{
+			Count();
+		}
 
 		if (gameOver) {
 			GameOver();
@@ -95,6 +96,7 @@ public class StateManager : MonoBehaviour
 
 	private void GameOver()
 	{
+		blurCover.enabled = true;
 		Vector3 start = blurCover.transform.position;
 		Vector3 target = new Vector3(0,160,0);
 
