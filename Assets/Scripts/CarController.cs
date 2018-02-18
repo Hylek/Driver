@@ -8,7 +8,6 @@ public class CarController : MonoBehaviour
 {
 	// Main Variables
 	public GameObject carPrefab;
-	public List<GameObject> cars;
 	private int lane = 0;
 	
 	// Spawning Variables
@@ -30,41 +29,8 @@ public class CarController : MonoBehaviour
 	private void Update () 
 	{
 		Spawn();
-
-		for (int i = 0; i < cars.Count; i++)
-		{
-			if (this == cars[i]) continue;
-
-			int currentLane = CheckLanes();
-		}
 	}
 
-	private int CheckLanes()
-	{	
-		for (int i = 0; i < cars.Count; i++)
-		{
-			if (this == cars[i]) continue;
-
-			if (Mathf.Abs(cars[i].transform.position.x - laneOne) < 0.1)
-			{
-				lane = 1;
-			}
-			if (Mathf.Abs(cars[i].transform.position.x - laneTwo) < 0.1)
-			{
-				lane = 2;
-			}
-			if (Mathf.Abs(cars[i].transform.position.x - laneThree) < 0.1)
-			{
-				lane = 3;
-			}
-			if (Mathf.Abs(cars[i].transform.position.x - laneFour) < 0.1)
-			{
-				lane = 4;
-			}
-			
-		}
-		return lane;
-	}
 
 	private void Spawn()
 	{
@@ -78,7 +44,7 @@ public class CarController : MonoBehaviour
 	private IEnumerator SpawnCar(float seconds)
 	{
 		yield return new WaitForSeconds(seconds);
-		cars.Add(Instantiate(carPrefab, new Vector3(LanePicker(), transform.position.y, transform.position.z - 0.3f), transform.rotation));
+		Instantiate(carPrefab, new Vector3(LanePicker(), transform.position.y, transform.position.z - 0.3f), transform.rotation);
 		
 		isSpawning = false;
 	}

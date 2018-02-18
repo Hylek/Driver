@@ -29,7 +29,10 @@ public class StateManager : MonoBehaviour
 	{
 		if (manager == null) manager = this;
 		else if (manager != this) Destroy(gameObject);
-		blurCover.enabled = false;
+		if (blurCover != null)
+		{
+			blurCover.enabled = false;
+		}
 	}
 
     void Start()
@@ -77,10 +80,10 @@ public class StateManager : MonoBehaviour
 			GameOver();
 		}
 
-	    if (t >= 30)
-	    {
-		    SpeedUp(1);
-	    }
+//	    if (t >= 30)
+//	    {
+//		    SpeedUp(1);
+//	    }
 	}
 
 	private void SpeedUp(int state)

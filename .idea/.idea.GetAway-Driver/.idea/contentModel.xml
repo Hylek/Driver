@@ -18,6 +18,7 @@
           <e p="CarController.cs" t="Include" />
           <e p="CarMover.cs" t="Include" />
           <e p="ColourSwapper.cs" t="Include" />
+          <e p="LaneChanger.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
           <e p="StateManager.cs" t="Include" />
           <e p="Timer.cs" t="Include" />

@@ -10,7 +10,8 @@ public class CarMover : MonoBehaviour
 	private int currentLane;
 	private float cooldown;
 	private bool blocked;
-	
+	private bool changeLanes;
+	private float otherCarPosY;
 	
 	// Location points for each lane on the x axis
 	private float laneOne = -2.15f;
@@ -26,22 +27,49 @@ public class CarMover : MonoBehaviour
 		Debug.Log(currentLane);
 		cooldown = 4;
 		blocked = false;
+		changeLanes = false;
 	}
 
 	private void Update()
 	{
 		cooldown -= Time.deltaTime;
-		AdjustSpeed();
 
-		if (currentLane != 4 && CheckAdjacent() == 1 && cooldown <= 0)
+		if (CheckInFront())
 		{
-			blocked = true;
-		}
-		else
-		{
-			blocked = false;
+			changeLanes = true;
 		}
 		
+		if (speed > otherCarSpeed && changeLanes)
+		{
+			if (CheckAdjacent() == 0 && currentLane == 4)
+			{
+				MoveLeft(laneThree, 3);
+			}
+			if (CheckAdjacent() == 1 && currentLane == 4)
+			{
+				speed -= 0.05f;
+			}	
+			
+			if (CheckAdjacent() != 1 && currentLane == 3)
+			{
+				MoveLeft(laneTwo, 2);
+			}
+			
+			
+			if (CheckAdjacent() == 0 && currentLane == 2)
+			{
+				MoveLeft(laneOne, 1);
+			}
+
+			if (CheckAdjacent() == 1 || CheckAdjacent() == 2 && CheckLane() == 0)
+			{
+				changeLanes = false;
+			}
+		}
+		if (Mathf.Abs(transform.position.y - otherCarPosY) < 0.05)
+		{
+			speed = otherCarSpeed;
+		}
 	}
 
 	private int CheckLane()
@@ -67,6 +95,24 @@ public class CarMover : MonoBehaviour
 		return lane;
 	}
 
+	private void MoveLeft(float targetLanePos, float targetLane)
+	{
+		if (transform.position.x != targetLanePos && CheckLane() != targetLane)
+		{
+			transform.Translate(Vector2.left * speed / 1.5f * Time.deltaTime);
+		}
+		if(CheckLane() == targetLane)
+		{
+			changeLanes = false;
+			currentLane = CheckLane();
+		}
+	}
+
+	private void MoveRight()
+	{
+		transform.Translate(Vector2.right * speed / 1.5f * Time.deltaTime);
+	}
+
 	private void AdjustSpeed()
 	{	
 		if (CheckInFront() && speed > otherCarSpeed)
@@ -81,13 +127,14 @@ public class CarMover : MonoBehaviour
 
 	private int CheckAdjacent()
 	{
-		
 		if (currentLane != 4)
 		{
-			RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x + 0.5f, transform.position.y), Vector2.right, 2.0f);
-			Debug.DrawRay(new Vector2(transform.position.x + 0.5f, transform.position.y), new Vector2(2.0f, 0.0f), Color.green);
+			RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x + 0.5f, transform.position.y + 0.5f), Vector2.right, 1.0f);
+			RaycastHit2D hitBot = Physics2D.Raycast(new Vector2(transform.position.x + 0.5f, transform.position.y - 0.5f), Vector2.right, 1.0f);
+			Debug.DrawRay(new Vector2(transform.position.x + 0.5f, transform.position.y + 0.5f), new Vector2(1.0f, 0.0f), Color.green);
+			Debug.DrawRay(new Vector2(transform.position.x + 0.5f, transform.position.y - 0.5f), new Vector2(1.0f, 0.0f), Color.green);
 
-			if (hit.collider != null)
+			if (hit.collider != null || hitBot.collider != null)
 			{
 				return 2;
 				cooldown = 4;
@@ -95,10 +142,12 @@ public class CarMover : MonoBehaviour
 		}
 		if (currentLane != 1)
 		{
-			RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x - 0.5f, transform.position.y), Vector2.left, 2.0f);
-			Debug.DrawRay(new Vector2(transform.position.x - 0.5f, transform.position.y), new Vector2(-2.0f, 0.0f), Color.cyan);
+			RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x - 0.5f, transform.position.y + 0.5f), Vector2.left, 1.0f);
+			RaycastHit2D hitBot = Physics2D.Raycast(new Vector2(transform.position.x - 0.5f, transform.position.y - 0.5f), Vector2.left, 1.0f);
+			Debug.DrawRay(new Vector2(transform.position.x - 0.5f, transform.position.y + 0.5f), new Vector2(-1.0f, 0.0f), Color.cyan);
+			Debug.DrawRay(new Vector2(transform.position.x - 0.5f, transform.position.y - 0.5f), new Vector2(-1.0f, 0.0f), Color.cyan);
 			
-			if (hit.collider != null)
+			if (hit.collider != null || hitBot.collider != null)
 			{
 				return 1;
 				cooldown = 4;
@@ -111,9 +160,11 @@ public class CarMover : MonoBehaviour
 	{
 		RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.5f), Vector2.down, 2.0f);
 		Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.5f), new Vector2(0.0f, -2.0f), Color.magenta);
+		
 		if (hit.collider != null)
 		{
 			otherCarSpeed = hit.transform.gameObject.GetComponent<CarMover>().speed;
+			otherCarPosY = hit.transform.position.y;
 			return true;
 		}
 		return false;
@@ -122,14 +173,5 @@ public class CarMover : MonoBehaviour
 	private void FixedUpdate()
 	{
 		transform.Translate(Vector2.down * speed * Time.deltaTime);
-	}
-
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		if (speed > other.transform.gameObject.GetComponent<CarMover>().speed)
-		{
-			slowDown = true;
-			otherCarSpeed = other.transform.gameObject.GetComponent<CarMover>().speed;
-		}
 	}
 }

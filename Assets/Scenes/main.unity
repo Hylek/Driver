@@ -538,9 +538,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carPrefab: {fileID: 1469380119218152, guid: f449c97ab6a4e9348a7bca68c3746939, type: 2}
-  cars: []
-  minTime: 1
-  maxTime: 5
+  minTime: 3
+  maxTime: 6
 --- !u!1 &1102441333
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,13 +829,13 @@ GameObject:
   - component: {fileID: 1338477467}
   - component: {fileID: 1338477466}
   - component: {fileID: 1338477468}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1338477464
 SpriteRenderer:
   m_ObjectHideFlags: 0
