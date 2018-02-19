@@ -7,12 +7,12 @@ PlayerSettings:
   productGUID: dc285d85bf03b1d47a78cceb2077408b
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
-  defaultScreenOrientation: 0
+  defaultScreenOrientation: 2
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DanielCumbor
-  productName: DriverG7
+  productName: DriverG8
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -127,11 +127,11 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.1.2
+  bundleVersion: 0.1.4
   preloadedAssets:
-  - {fileID: 2800000, guid: 9c7faefcdfc4b67419cde01e9c41fdd1, type: 3}
-  - {fileID: 1469380119218152, guid: f449c97ab6a4e9348a7bca68c3746939, type: 2}
-  - {fileID: 2800000, guid: 11c7156f59fc29a4ca27b74a036db22d, type: 3}
+  - {fileID: 102900000, guid: cbca039604583a54a8ee8df66568275d, type: 3}
+  - {fileID: 102900000, guid: 9ab5d4bb85940be409bbc4e6e6a3c9dc, type: 3}
+  - {fileID: 102900000, guid: 3e4792daf477e7445948ce6c8899d136, type: 3}
   metroInputSource: 0
   m_HolographicPauseOnTrackingLoss: 1
   xboxOneDisableKinectGpuReservation: 0
@@ -155,9 +155,9 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: nielCumbor.DriverWatch7
+    Android: nielCumbor.DriverWatch8
   buildNumber: {}
-  AndroidBundleVersionCode: 10
+  AndroidBundleVersionCode: 11
   AndroidMinSdkVersion: 23
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
