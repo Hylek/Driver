@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+/* Daniel Cumbor 2018 */
 public class StateManager : MonoBehaviour
 {
 	public static StateManager manager = null;
@@ -75,11 +75,15 @@ public class StateManager : MonoBehaviour
 			GameOver();
 		}
 
-//	    if (t >= 30)
-//	    {
-//		    SpeedUp(1);
-//	    }
-	}
+	    if (t >= 5 && t <= 30)
+	    {
+		    SpeedUp(1);
+	    }
+        if (t >= 30 && t <= 60)
+        {
+            SpeedUp(2);
+        }
+    }
 
 	private void SpeedUp(int state)
 	{
@@ -87,15 +91,21 @@ public class StateManager : MonoBehaviour
 		{
 			if (speed <= 10)
 			{
-				speed += 0.05f;
+				speed += 0.005f;
 			}
 		}
-	}
+        if (state == 2)
+        {
+            if (speed <= 14)
+            {
+                speed += 0.005f;
+            }
+        }
+    }
 
 	private void GameOver()
 	{
         uncover = false;
-        Vector3 target = new Vector3(0,160,0);
 
 		if (gameOverText.alpha < 1) 
 		{

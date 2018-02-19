@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
+/* Daniel Cumbor 2018 */
 public class ColourSwapper : MonoBehaviour
 {
     Color color;

@@ -1,15 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
+/* Daniel Cumbor 2018 */
 public class PlayerController : MonoBehaviour
 {
     public float speed;
-
-	void Start () 
-    {
-		
-	}
+    public bool useTilt;
 	
 	void Update () 
     {
@@ -18,7 +12,16 @@ public class PlayerController : MonoBehaviour
 			StateManager.manager.gameOver = true;
 			Destroy (gameObject);
 		}
-	}
+
+        if(transform.position.x >= 3.8)
+        {
+            transform.Translate(Vector2.left * speed * Time.deltaTime);
+        }
+        if (transform.position.x <= -3)
+        {
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+        }
+    }
 
     void FixedUpdate()
     {
@@ -32,14 +35,16 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (touch.phase == TouchPhase.Stationary && touch.position.x < Screen.width / 2)
                 {
-                    GetComponent<Rigidbody2D>().AddForce(Vector2.left * speed);
+                    //GetComponent<Rigidbody2D>().AddForce(Vector2.left * speed);
+                    transform.Translate(Vector2.left * speed * Time.deltaTime);
                 }
                 else if (touch.phase == TouchPhase.Began && touch.position.x > Screen.width / 2)
                 {
                 }
                 else if (touch.phase == TouchPhase.Stationary && touch.position.x > Screen.width / 2)
                 {
-                    GetComponent<Rigidbody2D>().AddForce(Vector2.right * speed);
+                    //GetComponent<Rigidbody2D>().AddForce(Vector2.right * speed);
+                    transform.Translate(Vector2.right * speed * Time.deltaTime);
                 }
                 if (touch.phase == TouchPhase.Ended)
                 {
@@ -50,20 +55,23 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.A))
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.left * speed);
+            transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
         if(Input.GetKey(KeyCode.D))
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.right * speed);
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+        }
+
+        if(useTilt)
+        {
+            Vector3 move = new Vector3(Input.acceleration.x, 0, 0);
+            transform.Translate(move * speed * Time.deltaTime);
         }
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.transform.name == "Car(Clone)")
-        {
-            StateManager.manager.gameOver = true;
-            Destroy(gameObject);
-            Destroy(other.gameObject);
-        }
+        StateManager.manager.gameOver = true;
+        Destroy(gameObject);
+        Destroy(other.gameObject);
     }
 }

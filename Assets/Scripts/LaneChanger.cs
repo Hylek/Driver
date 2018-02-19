@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters;
-using UnityEngine;
-
+﻿using UnityEngine;
+/* Daniel Cumbor 2018 */
 public class LaneChanger : MonoBehaviour
 {
     public float speed;
@@ -18,10 +15,10 @@ public class LaneChanger : MonoBehaviour
     private RaycastHit[] frontalRays;*/
     
     // Location points for each lane on the x axis
-    private float laneOne = -2.15f;
-    private float laneTwo = -0.53f;
-    private float laneThree = 1.18f;
-    private float laneFour = 2.86f;
+    private float laneOne = -2.4f;
+    private float laneTwo = -0.8f;
+    private float laneThree = 0.95f;
+    private float laneFour = 2.6f;
 
     private void Start()
     {
@@ -165,8 +162,8 @@ public class LaneChanger : MonoBehaviour
 
     private bool CheckFront()
     {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.5f),Vector2.up, 2.0f);
-        Debug.DrawRay(new Vector2(transform.position.x, transform.position.y + 0.5f), new Vector2(0.0f, 2.0f),Color.magenta);
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 1.1f),Vector2.up, 2.0f);
+        Debug.DrawRay(new Vector2(transform.position.x, transform.position.y + 1.1f), new Vector2(0.0f, 2.0f),Color.magenta);
 /*        for(float i = 0; i < rayAmount; i += currentAngle)
         {
             float radian = i * Mathf.Deg2Rad;
@@ -197,13 +194,13 @@ public class LaneChanger : MonoBehaviour
     {
         if (currentLane != 1)
         {
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x - 0.5f, transform.position.y + 0.5f), Vector2.left, 1.3f);
-            RaycastHit2D hitBot = Physics2D.Raycast(new Vector2(transform.position.x - 0.5f, transform.position.y - 0.5f), Vector2.left, 1.3f);
-            RaycastHit2D hitAngle = Physics2D.Raycast(new Vector2(transform.position.x - 0.5f, transform.position.y + 0.5f), new Vector2(-1, 1), 1.0f);
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x - 0.8f, transform.position.y + 0.8f), Vector2.left, 1.3f);
+            RaycastHit2D hitBot = Physics2D.Raycast(new Vector2(transform.position.x - 0.8f, transform.position.y - 0.8f), Vector2.left, 1.3f);
+            RaycastHit2D hitAngle = Physics2D.Raycast(new Vector2(transform.position.x - 0.8f, transform.position.y + 0.8f), new Vector2(-1, 1), 1.0f);
             
-            Debug.DrawRay(new Vector2(transform.position.x - 0.5f, transform.position.y + 0.5f), new Vector2(-1.3f, 0.0f), Color.cyan);
-            Debug.DrawRay(new Vector2(transform.position.x - 0.5f, transform.position.y - 0.5f), new Vector2(-1.3f, 0.0f), Color.cyan);
-            Debug.DrawRay(new Vector2(transform.position.x - 0.5f, transform.position.y + 0.5f), new Vector2(-1.0f, 1.0f), Color.cyan);
+            Debug.DrawRay(new Vector2(transform.position.x - 0.5f, transform.position.y + 0.8f), new Vector2(-1.3f, 0.0f), Color.cyan);
+            Debug.DrawRay(new Vector2(transform.position.x - 0.5f, transform.position.y - 0.8f), new Vector2(-1.3f, 0.0f), Color.cyan);
+            Debug.DrawRay(new Vector2(transform.position.x - 0.5f, transform.position.y + 0.8f), new Vector2(-1.0f, 1.0f), Color.cyan);
 
             if (hit.collider != null || hitBot.collider != null || hitAngle.collider != null)
             {
@@ -217,13 +214,13 @@ public class LaneChanger : MonoBehaviour
     {
         if (currentLane != 4)
         {
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x + 0.5f, transform.position.y + 0.5f),Vector2.right, 1.3f);
-            RaycastHit2D hitBot =Physics2D.Raycast(new Vector2(transform.position.x + 0.5f, transform.position.y - 0.5f), Vector2.right,1.3f);
-            RaycastHit2D hitAngle =Physics2D.Raycast(new Vector2(transform.position.x + 0.5f, transform.position.y + 0.5f), Vector2.one,1.0f);
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x + 0.8f, transform.position.y + 0.8f),Vector2.right, 1.3f);
+            RaycastHit2D hitBot =Physics2D.Raycast(new Vector2(transform.position.x + 0.8f, transform.position.y - 0.8f), Vector2.right,1.3f);
+            RaycastHit2D hitAngle =Physics2D.Raycast(new Vector2(transform.position.x + 0.8f, transform.position.y + 0.8f), Vector2.one,1.0f);
             
-            Debug.DrawRay(new Vector2(transform.position.x + 0.5f, transform.position.y + 0.5f), new Vector2(1.3f, 0.0f), Color.green);
-            Debug.DrawRay(new Vector2(transform.position.x + 0.5f, transform.position.y - 0.5f), new Vector2(1.3f, 0.0f), Color.green);
-            Debug.DrawRay(new Vector2(transform.position.x + 0.5f, transform.position.y + 0.5f), new Vector2(1.0f, 1.0f), Color.green);
+            Debug.DrawRay(new Vector2(transform.position.x + 0.5f, transform.position.y + 0.8f), new Vector2(1.3f, 0.0f), Color.green);
+            Debug.DrawRay(new Vector2(transform.position.x + 0.5f, transform.position.y - 0.8f), new Vector2(1.3f, 0.0f), Color.green);
+            Debug.DrawRay(new Vector2(transform.position.x + 0.5f, transform.position.y + 0.8f), new Vector2(1.0f, 1.0f), Color.green);
 
             if (hit.collider != null || hitBot.collider != null || hitAngle.collider != null)
             {
