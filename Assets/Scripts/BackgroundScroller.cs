@@ -7,7 +7,7 @@ public class BackgroundScroller : MonoBehaviour
 {
 	public GameObject[] tiles;
 	public Vector3 startPos;
-	public Vector2 endPos;
+	public Vector3 endPos;
 	
 	void Start ()
 	{
@@ -25,7 +25,7 @@ public class BackgroundScroller : MonoBehaviour
 			else
 			{
 				tiles[i].transform.Translate(Vector2.down * StateManager.manager.speed * Time.deltaTime);
-			}
+            }
 		}
 	}
 }

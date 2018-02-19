@@ -13,6 +13,5 @@ public class ColourSwapper : MonoBehaviour
 	void Update ()
     {
         GetComponent<Text>().color = Color.Lerp(color, Color.magenta, Mathf.PingPong(Time.time, 1));
-
 	}
 }

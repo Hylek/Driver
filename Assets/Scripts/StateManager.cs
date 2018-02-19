@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public class StateManager : MonoBehaviour
 {
 	public static StateManager manager = null;
-	public Image blurCover;
     public CanvasGroup cover;
 	public CanvasGroup gameOverText;
 	public Button restart;
@@ -29,10 +28,6 @@ public class StateManager : MonoBehaviour
 	{
 		if (manager == null) manager = this;
 		else if (manager != this) Destroy(gameObject);
-		if (blurCover != null)
-		{
-			blurCover.enabled = false;
-		}
 	}
 
     void Start()
@@ -99,20 +94,14 @@ public class StateManager : MonoBehaviour
 
 	private void GameOver()
 	{
-		blurCover.enabled = true;
-		Vector3 start = blurCover.transform.position;
-		Vector3 target = new Vector3(0,160,0);
-
-		if(start.y < target.y)
-		{
-			blurCover.transform.Translate(Vector3.up * 4f);
-		}
+        uncover = false;
+        Vector3 target = new Vector3(0,160,0);
 
 		if (gameOverText.alpha < 1) 
 		{
 			gameOverText.alpha += 0.05f;
+            cover.alpha += 0.05f;
 		}
-
 		restart.interactable = true;
 	}
 
