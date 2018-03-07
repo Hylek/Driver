@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 			Destroy (gameObject);
 		}
 
-        if(transform.position.x >= 3.8)
+        if(transform.position.x >= 3.3f)
         {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
@@ -25,34 +25,36 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.touchCount > 0)
+        if(!useTilt)
         {
-            foreach (Touch touch in Input.touches)
+            if (Input.touchCount > 0)
             {
-                if (touch.phase == TouchPhase.Began && touch.position.x < Screen.width / 2)
+                foreach (Touch touch in Input.touches)
                 {
+                    if (touch.phase == TouchPhase.Began && touch.position.x < Screen.width / 2)
+                    {
 
-                }
-                else if (touch.phase == TouchPhase.Stationary && touch.position.x < Screen.width / 2)
-                {
-                    //GetComponent<Rigidbody2D>().AddForce(Vector2.left * speed);
-                    transform.Translate(Vector2.left * speed * Time.deltaTime);
-                }
-                else if (touch.phase == TouchPhase.Began && touch.position.x > Screen.width / 2)
-                {
-                }
-                else if (touch.phase == TouchPhase.Stationary && touch.position.x > Screen.width / 2)
-                {
-                    //GetComponent<Rigidbody2D>().AddForce(Vector2.right * speed);
-                    transform.Translate(Vector2.right * speed * Time.deltaTime);
-                }
-                if (touch.phase == TouchPhase.Ended)
-                {
-                    //transform.Translate(Vector2.zero);
+                    }
+                    else if (touch.phase == TouchPhase.Stationary && touch.position.x < Screen.width / 2)
+                    {
+                        //GetComponent<Rigidbody2D>().AddForce(Vector2.left * speed);
+                        transform.Translate(Vector2.left * speed * Time.deltaTime);
+                    }
+                    else if (touch.phase == TouchPhase.Began && touch.position.x > Screen.width / 2)
+                    {
+                    }
+                    else if (touch.phase == TouchPhase.Stationary && touch.position.x > Screen.width / 2)
+                    {
+                        //GetComponent<Rigidbody2D>().AddForce(Vector2.right * speed);
+                        transform.Translate(Vector2.right * speed * Time.deltaTime);
+                    }
+                    if (touch.phase == TouchPhase.Ended)
+                    {
+                        //transform.Translate(Vector2.zero);
+                    }
                 }
             }
         }
-
         if(Input.GetKey(KeyCode.A))
         {
             transform.Translate(Vector2.left * speed * Time.deltaTime);

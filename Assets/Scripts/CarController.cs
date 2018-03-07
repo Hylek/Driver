@@ -19,8 +19,8 @@ public class CarController : MonoBehaviour
 
     private void Start()
     {
-        minTime = 1.0f;
-        maxTime = 3.0f;
+        minTime = 5.0f;
+        maxTime = 5.0f;
     }
 
     private void Update () 
@@ -43,13 +43,13 @@ public class CarController : MonoBehaviour
         }
         if (StateManager.manager.t >= 60 && StateManager.manager.t <= 120)
         {
-            minTime = 4f;
+            minTime = 5f;
             maxTime = 6f;
         }
         if (StateManager.manager.t >= 120)
         {
-            minTime = 2f;
-            maxTime = 4f;
+            minTime = 3f;
+            maxTime = 5f;
         }
     }
 
@@ -86,6 +86,7 @@ public class CarController : MonoBehaviour
 			case 4: chosenLane = laneFour;
 				break;	
 		}
+
 		return chosenLane;
 	}
 }
