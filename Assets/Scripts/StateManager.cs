@@ -28,6 +28,9 @@ public class StateManager : MonoBehaviour
 	{
 		if (manager == null) manager = this;
 		else if (manager != this) Destroy(gameObject);
+
+        // Ensure the screen never sleeps when the game is being played
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
 	}
 
     void Start()
@@ -79,10 +82,10 @@ public class StateManager : MonoBehaviour
 	    {
 		    SpeedUp(1);
 	    }
-        if (t >= 30 && t <= 60)
-        {
-            SpeedUp(2);
-        }
+        //if (t >= 30 && t <= 60)
+        //{
+        //    SpeedUp(2);
+        //}
     }
 
 	private void SpeedUp(int state)

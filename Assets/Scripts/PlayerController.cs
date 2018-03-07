@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         if(useTilt)
         {
             Vector3 move = new Vector3(Input.acceleration.x, 0, 0);
-            transform.Translate(move * speed * Time.deltaTime);
+            transform.Translate(move * (speed * 2) * Time.deltaTime);
         }
     }
     private void OnCollisionEnter2D(Collision2D other)

@@ -8,14 +8,20 @@ public class CarController : MonoBehaviour
 	
 	// Spawning Variables
 	private bool isSpawning = false;
-	public float minTime = 1.0f;
-	public float maxTime = 5.0f;
+	public float minTime;
+	public float maxTime;
 
     // Location points for each lane on the x axis
     private float laneOne = -2.4f;
     private float laneTwo = -0.8f;
     private float laneThree = 0.95f;
     private float laneFour = 2.6f;
+
+    private void Start()
+    {
+        minTime = 1.0f;
+        maxTime = 3.0f;
+    }
 
     private void Update () 
 	{
@@ -25,7 +31,12 @@ public class CarController : MonoBehaviour
 
     private void Intervals()
     {
-        if(StateManager.manager.t >= 30 && StateManager.manager.t <= 60)
+        if (StateManager.manager.t >= 5 && StateManager.manager.t <= 30)
+        {
+            minTime = 5;
+            maxTime = 10f;
+        }
+        if (StateManager.manager.t >= 30 && StateManager.manager.t <= 60)
         {
             minTime = 3.5f;
             maxTime = 8f;
