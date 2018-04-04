@@ -19,7 +19,7 @@ public class CarController : MonoBehaviour
 
     private void Start()
     {
-        minTime = 5.0f;
+        minTime = 2.0f;
         maxTime = 5.0f;
     }
 
